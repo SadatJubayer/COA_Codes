@@ -1,0 +1,39 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+
+    STREVEN DB 0AH,0DH,'NUMBER IS EVEN$'
+    STRODD DB 0AH,0DH,'NUMBER IS ODD$'
+.CODE
+
+MAIN PROC
+ 
+    MOV AX,@DATA
+    MOV DS,AX
+ 
+    MOV AH,1
+    INT 21H
+ 
+    TEST AL,01H
+    JZ EVEN
+ 
+    MOV AH,9
+    LEA DX,STRODD
+    INT 21H
+ 
+    JMP END_:
+ 
+    EVEN:
+        MOV AH,9
+        LEA DX,STREVEN
+        INT 21H
+     
+        JMP END_
+     
+    END_:
+ 
+    MOV AH,4CH
+    INT 21H
+ 
+    MAIN ENDP
+END MAIN

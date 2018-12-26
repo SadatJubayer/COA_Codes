@@ -1,0 +1,32 @@
+.MODEL SMALL
+.STACK 100H
+.DATA
+.CODE 
+MAIN PROC 
+ 
+RE_INPUT:  
+    MOV AH, 1
+    INT 21H      ; INPUT 
+    MOV BL, AL 
+    
+    MOV AH, 2 
+    MOV DL, BL    ;OUTPUT 
+    INT 21H 
+   
+    MOV DL, 10D
+    INT 21H         ;NEW LINE 
+    MOV DL, 13D 
+    INT 21H
+    
+    
+    CMP BL, 35   ; COMPARING WITH 35H (#)  
+    JE EXIT      ; IF EQUAL, JUMP EXIT 
+    JMP RE_INPUT ; IN NOT EQUAL, PROCESS WILL BE REPEATED AGAIN 
+    
+    
+EXIT:
+    MOV AH, 4CH 
+    INT 21H 
+        
+    MAIN ENDP
+END MAIN 

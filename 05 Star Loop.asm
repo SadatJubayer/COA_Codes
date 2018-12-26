@@ -1,0 +1,25 @@
+.MODEL SMALL
+.STACK 100H
+.CODE 
+MAIN PROC
+    
+    
+    ;USER INPUT FOR A NUMBER 
+    
+    MOV AH, 1
+    INT 21H
+    MOV BL, AL 
+    SUB BL, 48
+    
+   
+    MOV CX,  0 ; BECAUSE BL IS LOW BIT AND CX IS HIGHT BIT 
+    MOV CL, BL  ; CX FOR COUNTING LOOP 
+    MOV AH, 2
+    MOV DL, '*'   
+   
+   TOP:
+    INT 21H
+    LOOP TOP   ; LOOPING ON TOP LEVEL 
+     
+    MAIN ENDP 
+END MAIN 
